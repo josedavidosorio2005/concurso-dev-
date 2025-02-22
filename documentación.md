@@ -1,66 +1,81 @@
-Documentación para el Proyecto "Mercado Inteligente"
-Descripción del Proyecto
-El proyecto "Mercado Inteligente" es una aplicación de escritorio desarrollada en Python utilizando la biblioteca Tkinter. El objetivo de la aplicación es gestionar un sistema de carrito de compras que permita a los usuarios agregar, eliminar y modificar productos, así como calcular totales y aplicar descuentos.
+Documentación del Sistema de Carrito de Compras - Mercado Inteligente
+Introducción
+El proyecto Mercado Inteligente es un sistema de carrito de compras desarrollado en Python utilizando la biblioteca Tkinter para la interfaz gráfica de usuario. Este sistema permite a los usuarios gestionar productos en un carrito, aplicar descuentos, y generar tickets de compra en formato PDF.
 
-Tabla de Contenidos
-Requisitos
-Estructura del Proyecto
-Características Principales
-Uso de la Aplicación
-Funciones Clave
-Conclusión
 Requisitos
 Python 3.x
-Biblioteca Tkinter (incluida en la instalación estándar de Python)
-Conocimientos básicos de programación en Python
-Estructura del Proyecto
-El archivo principal de la aplicación es _2.py. Este archivo contiene la clase MercadoInteligenteGUI, que gestiona la interfaz gráfica y la lógica del carrito de compras.
+Bibliotecas:
+tkinter
+ttk
+messagebox
+datetime
+os
+glob
+fpdf
+Estructura del Código
+El código se organiza en una clase principal llamada MercadoInteligenteGUI, que contiene todos los métodos y atributos necesarios para la funcionalidad de la aplicación. A continuación, se describen los componentes principales.
 
-Estructura de Clases
-MercadoInteligenteGUI: Clase principal que maneja la interfaz y la lógica del carrito.
-Métodos:
-__init__()
-configurar_estilos()
-crear_interfaz()
-agregar_producto()
-eliminar_producto()
-modificar_producto()
-finalizar_compra()
-calcular_descuento()
-actualizar_tabla_carrito()
-verificar_presupuesto()
-guardar_datos()
-finalizar_proceso_compra()
-Características Principales
-Agregar Productos: Permite al usuario añadir productos al carrito con nombre, cantidad y precio.
-Eliminar Productos: Opción para eliminar productos seleccionados del carrito.
-Modificar Productos: Permite actualizar la cantidad y el precio de un producto en el carrito.
-Cálculo de Totales: Calcula automáticamente el subtotal, descuento y total a pagar.
-Visualización de Ticket: Genera un ticket de compra al finalizar la compra, mostrando todos los detalles.
-Uso de la Aplicación
-Iniciar la Aplicación: Ejecutar el archivo _2.py en un entorno Python.
-Agregar Productos: Hacer clic en "Agregar Producto" y llenar el formulario.
-Modificar Productos: Seleccionar un producto en la tabla y hacer clic en "Modificar Producto".
-Eliminar Productos: Seleccionar un producto y hacer clic en "Eliminar Producto".
-Finalizar Compra: Hacer clic en "Finalizar Compra" para ver el ticket.
-Funciones Clave
-agregar_producto()
-Abre un diálogo para ingresar los detalles del producto y lo añade al carrito tras validación.
+Clase MercadoInteligenteGUI
+Atributos
+root: Ventana principal de la aplicación.
+carrito: Lista que almacena los productos añadidos al carrito.
+presupuesto_limite: Presupuesto máximo permitido (por defecto, $1000.00).
+umbral_descuento: Cantidad mínima de productos para aplicar descuentos (por defecto, 5).
+Métodos
+__init__(self, root)
 
-eliminar_producto()
-Elimina el producto seleccionado del carrito y actualiza la tabla.
+Inicializa la ventana y configura la interfaz gráfica.
+configurar_estilos(self)
 
-modificar_producto()
-Permite modificar la cantidad y el precio de un producto ya existente en el carrito.
+Configura los estilos visuales de la aplicación utilizando ttk.Style.
+crear_interfaz(self)
 
-calcular_descuento(cantidad, precio_unitario)
-Calcula el descuento basado en la cantidad de productos comprados.
+Crea los componentes principales de la interfaz, incluyendo botones y tablas.
+crear_tabla_carrito(self, parent)
 
-actualizar_tabla_carrito()
-Actualiza la visualización de la tabla con los productos actuales en el carrito.
+Crea una tabla que muestra los productos en el carrito.
+agregar_producto(self)
 
-verificar_presupuesto()
-Verifica si el total de la compra supera el presupuesto límite definido.
+Abre un diálogo para agregar un nuevo producto al carrito.
+procesar_nuevo_producto(self, nombre, cantidad_str, precio_str, dialog)
 
+Valida y procesa los datos de un nuevo producto.
+calcular_descuento(self, cantidad, precio_unitario)
+
+Calcula el descuento basado en la cantidad de productos.
+actualizar_tabla_carrito(self)
+
+Actualiza la tabla con los productos actuales en el carrito.
+actualizar_totales(self)
+
+Actualiza las etiquetas de totales mostrando subtotal, descuento y total a pagar.
+verificar_presupuesto(self)
+
+Verifica si el total supera el presupuesto límite.
+eliminar_producto(self)
+
+Elimina el producto seleccionado del carrito.
+modificar_producto(self)
+
+Modifica el producto seleccionado.
+finalizar_compra(self)
+
+Finaliza la compra y muestra el ticket.
+guardar_ticket(self, ticket_window)
+
+Guarda el ticket en un archivo PDF.
+mostrar_historial(self)
+
+Muestra una ventana con el historial de facturas.
+finalizar_proceso_compra(self, ticket_window)
+
+Finaliza el proceso de compra y limpia el carrito.
+Función Principal
+Copiar
+def iniciar_aplicacion():
+    root = tk.Tk()
+    app = MercadoInteligenteGUI(root)
+    root.protocol("WM_DELETE_WINDOW", on_closing)
+    root.mainloop()
 Conclusión
-El proyecto "Mercado Inteligente" es una aplicación robusta y fácil de usar que permite a los usuarios gestionar su carrito de compras de manera eficiente. Su interfaz gráfica intuitiva y las funcionalidades implementadas hacen que la experiencia de compra sea agradable y organizada.
+El sistema Mercado Inteligente proporciona una interfaz amigable para gestionar compras, aplicar descuentos y generar tickets. Este proyecto puede ampliarse con más funcionalidades, como la integración de bases de datos o la implementación de un sistema de autenticación para los usuarios.
